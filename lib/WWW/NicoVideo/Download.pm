@@ -57,6 +57,10 @@ sub prepare_download {
     my $url = $params->param('url')
         or croak "URL not found in getflv response";
 
+    if ($params->param('deleted')) {
+        croak "Video has been deleted";
+    }
+
     # Not sure why, but you need to get the page again
     $ua->get("http://www.nicovideo.jp/watch/$video_id");
 
